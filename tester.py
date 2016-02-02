@@ -6,4 +6,5 @@ p.parse_phonemes(1)
 p.parse_phonemes(0)
 
 print(p.consonants)
+print()
 print(p.vowels)

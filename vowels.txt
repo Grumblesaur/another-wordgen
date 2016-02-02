@@ -1,5 +1,3 @@
-vowels
-
 height
 low:a,á
 mid:e,o,é,ó

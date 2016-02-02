@@ -74,8 +74,6 @@ class Phonology:
 				continue
 			if Helper.is_whitespace(line):
 				continue
-			if Helper.is_marker(line):
-				break
 			if Helper.is_category(line):
 				curr_category = line
 				switch[vow][curr_category] = {}
@@ -95,11 +93,7 @@ class Helper:
 	def is_comment(s):
 		return "!!" in s
 	
-	def is_marker(s):
-		return "#" in s
-	
 	def is_category(s):
 		temp = not Helper.is_whitespace(s) and not Helper.is_comment(s)
-		temp2 = temp and not Helper.is_marker(s)
-		temp3 = temp2 and ":" not in s and "," not in s
-		return temp3
+		temp2 = temp and ":" not in s and "," not in s
+		return temp2

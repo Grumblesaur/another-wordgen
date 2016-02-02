@@ -1,9 +1,6 @@
 !! Phonology Enumeration File
 !! Double-bangs mark comments
 !! empty lines are ignored
-!! # delimits sections (maybe?)
-
-consonants
 
 manner
 plosive:p,b,t,d,c,g
@@ -20,5 +17,3 @@ dorsal:c,g,h,ħ,j,y
 voicing
 voiced:b,d,g,m,n,ñ,v,z,ħ,r,j,w,l,y
 voiceless:p,c,t,s,f,h
-
-#
