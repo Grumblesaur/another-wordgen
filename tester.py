@@ -1,6 +1,6 @@
 import phonetic
 
-p = phonetic.Phonology("consonants.txt", "vowels.txt", "phonotactics.txt")
+p = phonetic.Phonology("cons.txt", "vowels.txt", "phono.txt", "freq.txt")
 
 p.parse_phonemes(1)
 p.parse_phonemes(0)
