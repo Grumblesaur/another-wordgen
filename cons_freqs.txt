@@ -1,0 +1,27 @@
+!! frequencies -- these must add to 100
+p:6
+t:12
+c:6
+
+b:3
+d:6
+g:3
+
+m:7
+n:10
+ñ:7
+
+f:3
+s:12
+h:5
+
+v:2
+z:1
+ħ:1
+
+w:3
+r:4
+j:2
+
+l:6
+y:1

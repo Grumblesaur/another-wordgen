@@ -68,13 +68,17 @@ class Phonology:
 	
 	# constructed with files containing information about a language's
 	# phonology; will need phoneme frequency file later
-	def __init__(self, consonants, vowels, phonotactics, frequencies):
-		self.consonant_file = consonants
-		self.vowel_file = vowels
-		self.phonotactics_file = phonotactics
-		self.frequencies_file = frequencies
+	def __init__(self, cons, vowl, phon, freqc, freqv):
+		self.consonant_file = cons
+		self.vowel_file = vowl
+		self.phonotactics_file = phon
+		self.cons_freq_file = freqc
+		self.vowl_freq_file = freqv
+		
 		self.consonants = {}
+		self.cons_freqs = {}
 		self.vowels = {}
+		self.vowl_freqs = {}
 		self.phonotactics = []
 	
 	# when arg 'vow' is 1 or True, parses the vowel file
@@ -101,6 +105,22 @@ class Phonology:
 				pair = line.split(":")
 				switch[vow][curr_category][pair[0]] = pair[1].split(",")
 		inventory.close()
+	
+	# as before, vow == 1 means parse the vowels, 0 parse the consonants
+	def parse_frequencies(self, vow):
+		frequencies = open((self.cons_freq_file, self.vowl_freq_file)[vow])
+		switch = [self.cons_freqs, self.vowl_freqs]
+		curr_category = ""
+		for line in frequencies:
+			line = line.strip()
+			if Helper.is_comment(line):
+				continue
+			if Helper.is_whitespace(line):
+				continue
+			else:
+				pair = line.split(":")
+				switch[vow][pair[0]] = float(pair[1])
+		frequencies.close()
 
 class Helper:
 	# figure this one out for yourself, nerd

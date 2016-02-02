@@ -1,0 +1,12 @@
+!! frequencies -- these must add to 100
+a:16
+e:16
+i:13
+o:09
+u:08
+
+á:85
+é:85
+í:7
+ó:75
+ú:65
