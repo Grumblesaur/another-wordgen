@@ -2,18 +2,20 @@
 !! Double-bangs mark comments
 !! empty lines are ignored
 
-manner
+all:p,t,c,b,d,g,m,n,ñ,f,s,h,v,z,ħ,l,y,r,j,w
+
 plosive:p,b,t,d,c,g
 nasal:m,n,ñ
 fricative:f,v,s,z,h,ħ
 lat_approx:l,y
 approx:r,j,w
 
-place
+sibilant:s,z
+clus_approx:l,r,j,w
+
 labial:p,b,m,w
 coronal:t,d,n,s,z,l,r
 dorsal:c,g,h,ħ,j,y
 
-voicing
 voiced:b,d,g,m,n,ñ,v,z,ħ,r,j,w,l,y
 voiceless:p,c,t,s,f,h

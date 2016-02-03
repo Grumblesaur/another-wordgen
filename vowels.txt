@@ -1,18 +1,16 @@
-height
+all:a,e,i,o,u,á,é,í,ó,ú
+
 low:a,á
 mid:e,o,é,ó
 high:u,i,ú,ú
 
-backness
 front:e,i,é,í
 central:a,á
 back:o,u,ó,ú
 
-rounding
 rounded:o,u,ó,ú
 unrounded:a,e,i,á,é,í
 
-length
 long:á,é,í,ó,ú
 short:a,e,i,o,u
 

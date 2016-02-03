@@ -68,29 +68,55 @@ class Phonology:
 	
 	# constructed with files containing information about a language's
 	# phonology; will need phoneme frequency file later
-	def __init__(self, cons, vowl, phon, freqc, freqv):
-		self.consonant_file = cons
-		self.vowel_file = vowl
-		self.phonotactics_file = phon
-		self.cons_freq_file = freqc
-		self.vowl_freq_file = freqv
+	def __init__(self, cs, vs, fc, fv, on, nu, cd):
+		self.consonant_file = cs
+		self.vowel_file = vs
+		self.consonant_frequency_file = fc
+		self.vowel_frequency_file = fv
+		self.onset_rule_file = on
+		self.nucleus_rule_file = nu
+		self.coda_rule_file = cd
 		
 		self.consonants = {}
-		self.cons_freqs = {}
+		self.consonant_frequencies = {}
 		self.vowels = {}
-		self.vowl_freqs = {}
-		self.phonotactics = []
+		self.vowel_frequencies = {}
+		self.onsets = []
+		self.nuclei = []
+		self.codas = []
 	
+	def parse_onsets_codas(self, coda):
+		rule_list = []
+		switch = [self.onset_rule_file, self.coda_rule_file]
+		return_switch = [self.onsets, self.codas]
+		rules = open(switch[coda])
+		for line in rules:
+			rule = []
+			line = line.strip()
+			if Helper.is_comment(line):
+				continue
+			if Helper.is_whitespace(line):
+				continue
+			else:
+				line = line.replace(" ", "")
+				line = line.split("+")
+					
+				for phone in line:
+					phone = phone.split(",")
+					phone = tuple(phone)
+					rule.append(phone)
+					rule_list.append(rule)
+		print(rule_list)
+		return_switch[coda] = rule_list
+	
+		
 	# when arg 'vow' is 1 or True, parses the vowel file
 	# when arg 'vow' is 0 or False, parses the consonant file
 	def parse_phonemes(self, vow):
 		inventory = open((self.consonant_file, self.vowel_file)[vow], "r")
-		curr_category = ""
 		
 		# effectively a multiplexor switched by 'vow' arg later
 		switch = [self.consonants, self.vowels]
-		
-		
 		for line in inventory:
 			# leading/trailing whitespace is a bitch, kill it.
 			line = line.strip()
@@ -98,18 +124,17 @@ class Phonology:
 				continue
 			if Helper.is_whitespace(line):
 				continue
-			if Helper.is_category(line):
-				curr_category = line
-				switch[vow][curr_category] = {}
 			else:
 				pair = line.split(":")
-				switch[vow][curr_category][pair[0]] = pair[1].split(",")
+				switch[vow][pair[0]] = pair[1].split(",")
 		inventory.close()
 	
 	# as before, vow == 1 means parse the vowels, 0 parse the consonants
 	def parse_frequencies(self, vow):
-		frequencies = open((self.cons_freq_file, self.vowl_freq_file)[vow])
-		switch = [self.cons_freqs, self.vowl_freqs]
+		frequencies = open((self.consonant_frequency_file,
+		self.vowel_frequency_file)[vow])
+		
+		switch = [self.consonant_frequencies, self.vowel_frequencies]
 		curr_category = ""
 		for line in frequencies:
 			line = line.strip()
