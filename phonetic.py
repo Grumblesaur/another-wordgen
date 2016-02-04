@@ -5,6 +5,9 @@
 # word generator package
 # module functions
 
+import random as rand
+import sys
+
 class LingException(Exception):
 	"""Exceptions related to Linguistic classes."""
 	def __init__(self, value):
@@ -65,7 +68,6 @@ class Phoneme:
 class Phonology:
 	"""Class for organizing/categorizing IPA symbols for random
 	phoneme generation and Phoneme and Syllable object construction."""
-	
 	# constructed with files containing information about a language's
 	# phonology; will need phoneme frequency file later
 	def __init__(self, cs, vs, fc, fv, on, nu, cd):
@@ -181,6 +183,51 @@ class Phonology:
 				pair = line.split(":")
 				switch[vow][pair[0]] = float(pair[1])
 		frequencies.close()
+	
+	def generate_onset_coda(self, coda): # does not yet account for freqs
+		"""Returns a list of Phoneme objects of either onset or coda
+		structure. Generates a coda if coda arg is 1, else generates
+		an onset."""
+		rand.seed(None)
+		possible = []
+		phonemes = []
+		rule = None
+		if coda == 1:
+			try:
+				rule = self.codas[rand.randrange(0, len(self.codas)-1)]
+			except:
+				sys.stderr.write("Coda rule file is empty!")
+				sys.exit()
+		else:
+			try:
+				rule = self.onsets[rand.randrange(0,len(self.onsets)-1)]
+			except:
+				sys.stderr.write("Onset rule file is empty!")
+				sys.exit()
+
+		for t in rule:
+			consonants = []
+			for descriptor in t:
+				consonants.append(self.consonants[descriptor])
+			possible.append(consonants)
+		for group in possible:
+			matched = False
+			phoneme_string = ""
+			if len(group) == 1:
+				phonemes.append(Phoneme(group[0][rand.randrange(1,
+				len(group[0]))-1]))
+			else:
+				while not matched:
+					incount = 0
+					s = group[0][rand.randrange(len(group[0])-1)]
+					phoneme_string = s
+					for g in group[1:]:
+						if s in g:
+							incount += 1
+					if incount == len(group[1:]):
+						matched = True
+				phonemes.append(Phoneme(phoneme_string))
+		return phonemes
 
 class Helper:
 	"""Module to assist with file parsing."""
