@@ -158,7 +158,7 @@ class Phonology:
 			if Helper.is_whitespace(line):
 				continue
 			else:
-				pair = line.split(":")
+				pair = line.replace(" ", "").replace("\t", "").split(":")
 				switch[vow][pair[0]] = pair[1].split(",")
 		inventory.close()
 	
@@ -172,7 +172,7 @@ class Phonology:
 		switch = [self.consonant_frequencies, self.vowel_frequencies]
 		curr_category = ""
 		for line in frequencies:
-			line = line.strip()
+			line = line.strip().replace(" ", "").replace("\t", "")
 			if Helper.is_comment(line):
 				continue
 			if Helper.is_whitespace(line):
