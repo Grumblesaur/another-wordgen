@@ -1,2 +1,7 @@
-all
+nasal
+none
+none
+none
+none
+approx
 none

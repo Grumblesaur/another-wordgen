@@ -1,12 +1,22 @@
 !! onsets
 
+none
+none
+all
+all
 all
 none
 
+plosive
+fricative
+nasal
+approx
+none
 plosive + clus_approx
 fricative + clus_approx
 voiceless,sibilant + voiceless,plosive
-
+none
 labial,nasal + voiced,labial,plosive
 dorsal,nasal + voiced,dorsal,plosive
 coronal,nasal + voiced,coronal,plosive
+none

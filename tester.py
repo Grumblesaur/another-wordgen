@@ -38,9 +38,10 @@ print(s)
 word_string = ""
 
 for ph in s.onset:
-	print(ph.ipa)
+	word_string += ph.ipa
 for ph in s.nucleus:
-	print(ph.ipa)
+	word_string += ph.ipa
 for ph in s.coda:
-	print(ph.ipa)
+	word_string += ph.ipa
 
+print(word_string)

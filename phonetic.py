@@ -65,7 +65,7 @@ class Phoneme:
 		self.ipa = ipa_string
 	
 	def __iter__(self):
-		return iter(self.ipa)
+		return iter(self)
 
 class Phonology:
 	"""Class for organizing/categorizing IPA symbols for random
