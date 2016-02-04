@@ -25,7 +25,7 @@ print(p.onsets, "\n")
 print(p.nuclei, "\n")
 
 print("Begin syllable generation.")
-dummy = Phoneme("a")
+dummy = [Phoneme("a")]
 s = Syllable(p.generate_onset_coda(0), dummy, p.generate_onset_coda(1))
 
 
@@ -33,3 +33,14 @@ print('\n')
 print(s.onset)
 print(s.nucleus)
 print(s.coda)
+print(s)
+
+word_string = ""
+
+for ph in s.onset:
+	print(ph.ipa)
+for ph in s.nucleus:
+	print(ph.ipa)
+for ph in s.coda:
+	print(ph.ipa)
+

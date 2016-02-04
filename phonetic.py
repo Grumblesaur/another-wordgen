@@ -64,6 +64,8 @@ class Phoneme:
 	def __init__(self, ipa_string):
 		self.ipa = ipa_string
 	
+	def __iter__(self):
+		return iter(self.ipa)
 
 class Phonology:
 	"""Class for organizing/categorizing IPA symbols for random
@@ -214,12 +216,12 @@ class Phonology:
 			matched = False
 			phoneme_string = ""
 			if len(group) == 1:
-				phonemes.append(Phoneme(group[0][rand.randrange(1,
+				phonemes.append(Phoneme(group[0][rand.randrange(0,
 				len(group[0]))-1]))
 			else:
 				while not matched:
 					incount = 0
-					s = group[0][rand.randrange(len(group[0])-1)]
+					s = group[0][rand.randrange(0,len(group[0]))-1]
 					phoneme_string = s
 					for g in group[1:]:
 						if s in g:

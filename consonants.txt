@@ -16,7 +16,7 @@ clus_approx:l,r,j,w
 
 labial:p,b,m,w
 coronal:t,d,n,s,z,l,r
-dorsal:c,g,h,ħ,j,y
+dorsal:c,g,h,ħ,j,y,ñ
 
 voiced:b,d,g,m,n,ñ,v,z,ħ,r,j,w,l,y
 voiceless:p,c,t,s,f,h
