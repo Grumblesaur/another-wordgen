@@ -3,6 +3,7 @@
 !! empty lines are ignored
 
 all:p,t,c,b,d,g,m,n,ñ,f,s,h,v,z,ħ,l,y,r,j,w
+none:
 
 plosive:p,b,t,d,c,g
 nasal:m,n,ñ

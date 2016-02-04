@@ -69,6 +69,9 @@ class Phonology:
 	# constructed with files containing information about a language's
 	# phonology; will need phoneme frequency file later
 	def __init__(self, cs, vs, fc, fv, on, nu, cd):
+		"""Obtains filenames needed for later setup method calls and
+		instantiates container members for phonemic and phonotactic
+		information."""
 		self.consonant_file = cs
 		self.vowel_file = vs
 		self.consonant_frequency_file = fc
@@ -84,11 +87,18 @@ class Phonology:
 		self.onsets = []
 		self.nuclei = []
 		self.codas = []
-	
+
+	# if argument 'coda' is 1, parse coda rules, else parse onset rules	
 	def parse_onsets_codas(self, coda):
+		"""Creates a list of lists of tuples from a consonant rules file,
+		either onsets or codas. Each tuple contains descriptors for a
+		potential phoneme to be selected later. Each list of tuples contains
+		tuples which, in order, describe the rules for an onset or coda.
+		Multiple tuples indicate that the rule will produce a cluster,
+		while a single tuple will produce a single-consonant onset or coda.
+		"""
 		rule_list = []
 		switch = [self.onset_rule_file, self.coda_rule_file]
-		return_switch = [self.onsets, self.codas]
 		rules = open(switch[coda])
 		for line in rules:
 			rule = []
@@ -98,21 +108,44 @@ class Phonology:
 			if Helper.is_whitespace(line):
 				continue
 			else:
-				line = line.replace(" ", "")
+				line = line.replace(" ", "").replace("\t", "")
 				line = line.split("+")
-					
 				for phone in line:
 					phone = phone.split(",")
 					phone = tuple(phone)
 					rule.append(phone)
 					rule_list.append(rule)
-		print(rule_list)
-		return_switch[coda] = rule_list
+		if coda == 1:
+			self.codas = rule_list[:]
+		else:
+			self.onsets = rule_list[:]
 	
+	def parse_nuclei(self):
+		"""Creates a list of lists of tuples, where each tuple contains
+		descriptors for a potential vowel to be selected, and each list of
+		tuples describes the rules for a possible syllable nucleus."""
+		rules = open(self.nucleus_rule_file)
+		for line in rules:
+			rule = []
+			line = line.strip()
+			if Helper.is_comment(line):
+				continue
+			if Helper.is_whitespace(line):
+				continue
+			else:
+				line = line.replace(" ", "").replace("\t","")
+				line = line.split("+")
+				for phone in line:
+					phone = phone.split(",")
+					phone = tuple(phone)
+					rule.append(phone)
+				self.nuclei.append(rule)
 		
 	# when arg 'vow' is 1 or True, parses the vowel file
 	# when arg 'vow' is 0 or False, parses the consonant file
 	def parse_phonemes(self, vow):
+		"""Gathers phonemes according to their category and stores them in
+		a dictionary."""
 		inventory = open((self.consonant_file, self.vowel_file)[vow], "r")
 		
 		# effectively a multiplexor switched by 'vow' arg later
@@ -131,6 +164,8 @@ class Phonology:
 	
 	# as before, vow == 1 means parse the vowels, 0 parse the consonants
 	def parse_frequencies(self, vow):
+		"""Gathers phoneme-frequency pairs and stores them in a dictionary.
+		"""
 		frequencies = open((self.consonant_frequency_file,
 		self.vowel_frequency_file)[vow])
 		
@@ -148,6 +183,8 @@ class Phonology:
 		frequencies.close()
 
 class Helper:
+	"""Module to assist with file parsing."""
+	
 	# figure this one out for yourself, nerd
 	def is_whitespace(s):
 		for c in s:
@@ -162,7 +199,7 @@ class Helper:
 		return "!!" in s
 
 	# determines whether a line bears categorical or phonetic information	
-	def is_category(s):
+	def is_category(s): # turns out not to be necessary at the moment
 		temp = not Helper.is_whitespace(s) and not Helper.is_comment(s)
 		temp2 = temp and ":" not in s and "," not in s
 		return temp2

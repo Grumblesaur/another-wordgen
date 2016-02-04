@@ -1,6 +1,7 @@
 !! onsets
 
 all
+none
 
 plosive + clus_approx
 fricative + clus_approx

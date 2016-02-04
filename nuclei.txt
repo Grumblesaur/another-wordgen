@@ -1,5 +1,4 @@
 all
-
 unrounded,central,short + high,short
 unrounded,front,short + high,short
 rounded,mid + high,front
