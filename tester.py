@@ -1,7 +1,23 @@
 from phonetic import *
 
-p = Phonology("consonants.txt", "vowels.txt", "cons_freqs.txt",
-"vowel_freqs.txt", "onsets.txt", "nuclei.txt", "codas.txt")
+path = "./rules/"
+
+cons = "consonants.txt"
+vows = "vowels.txt"
+cons_freqs = "cons_freqs.txt"
+vows_freqs = "vowel_freqs.txt"
+onsets = "onsets.txt"
+nuclei = "nuclei.txt"
+codas = "codas.txt"
+
+files = [cons, vows, cons_freqs, vows_freqs, onsets, nuclei, codas]
+
+for s in files:
+	s = path + s
+
+
+p = Phonology(files[0], files[1], files[2], files[3], files[4], files[5],
+files[6])
 
 print("Begin parsing.\n")
 p.parse_phonemes(1)
