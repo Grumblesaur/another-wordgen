@@ -1,0 +1,49 @@
+254 lines in file 'phonetic.py'.
+41 lines of code.
+184 lines of comments.
+29 lines of whitespace.
+
+47 lines in file 'tester.py'.
+36 lines of code.
+0 lines of comments.
+11 lines of whitespace.
+
+17 lines in file 'vowels.txt'.
+11 lines of code.
+0 lines of comments.
+6 lines of whitespace.
+
+12 lines in file 'vowel_freqs.txt'.
+10 lines of code.
+1 lines of comments.
+1 lines of whitespace.
+
+22 lines in file 'consonants.txt'.
+14 lines of code.
+3 lines of comments.
+5 lines of whitespace.
+
+27 lines in file 'cons_freqs.txt'.
+20 lines of code.
+1 lines of comments.
+6 lines of whitespace.
+
+7 lines in file 'codas.txt'.
+7 lines of code.
+0 lines of comments.
+0 lines of whitespace.
+
+22 lines in file 'onsets.txt'.
+19 lines of code.
+1 lines of comments.
+2 lines of whitespace.
+
+5 lines in file 'nuclei.txt'.
+4 lines of code.
+0 lines of comments.
+1 lines of whitespace.
+
+413 lines in files overall.
+162 lines of code.
+190 lines of comments.
+61 lines of whitespace.
