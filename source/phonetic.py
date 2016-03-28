@@ -28,7 +28,7 @@ class Word:
 			raise Exception("No syllables passed in!")
 		self.max_length = max_length
 	
-	#@TODO: this
+	#TODO: this
 	def build_word():
 		pass
 		

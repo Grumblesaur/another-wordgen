@@ -1,14 +1,14 @@
-from phonetic import *
+from source.phonetic import *
 
 path = "./rules/"
 
-cons = "consonants.txt"
-vows = "vowels.txt"
-cons_freqs = "cons_freqs.txt"
-vows_freqs = "vowel_freqs.txt"
-onsets = "onsets.txt"
-nuclei = "nuclei.txt"
-codas = "codas.txt"
+cons = path + "consonants.txt"
+vows = path + "vowels.txt"
+cons_freqs = path + "cons_freqs.txt"
+vows_freqs = path + "vowel_freqs.txt"
+onsets = path + "onsets.txt"
+nuclei = path + "nuclei.txt"
+codas = path + "codas.txt"
 
 files = [cons, vows, cons_freqs, vows_freqs, onsets, nuclei, codas]
 
