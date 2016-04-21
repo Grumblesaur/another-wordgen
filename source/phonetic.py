@@ -16,32 +16,49 @@ class LingException(Exception):
 	def __str__(self):
 		return repr(self.value)
 
-class Word:
+class Word(object):
 	"""Container class for Syllable"""
-	def __init__(self, syllables, max_length):
-		self.syllables = None
+	def __init__(self, syllables, max_length = 5):
+		self.syllables = []
 		if type(syllables) is Syllable:
 			self.syllables[0] = syllables
-		elif type(syllables) is List:
+		elif type(syllables) is list:
 			self.syllables[:] = syllables
 		else:
-			raise Exception("No syllables passed in!")
+			raise LingException("No syllables passed in!")
 		self.max_length = max_length
 	
-	#TODO: this
-	def build_word():
-		pass
+	def append(self, syllable):
+		self.syllables += [syllable]
+		return len(self.syllables) - 1
+	
+	def as_string(self):
+		return''.join([s.as_string()for s in self.syllables])
+	
+	# TODO:
+	# create methods for applying rewrite rules
 		
-class Syllable:
+class Syllable(object):
 	"""Container class for phonemes; stores phonemes in lists called
 	'onset', 'nucleus', and 'coda', after the parts of a syllable."""
 	def __init__(self, o, n, c):
-		if n == []:
-			raise LingException("Syllable must contain nucleus!")
+		if type(n) is not list: # this is a kludge until I fix how nuclei
+			self.nucleus = [n]  # phonemes are passed around
+		else:
+			self.nucleus = n
 		self.onset = o
-		self.nucleus = n
 		self.coda = c
 	
+	def as_string(self):
+		r = ""
+		for p in self.onset:
+			r += p.as_string()
+		for p in self.nucleus:
+			r += p.as_string()
+		for p in self.coda:
+			r += p.as_string()
+		return r
+		
 	def onset_is_cluster(self):
 		return len(self.onset) > 1
 	
@@ -57,15 +74,19 @@ class Syllable:
 	def has_coda(self):
 		return self.coda != []
 
-class Phoneme:
+class Phoneme(object):
 	"""Container class for raw IPA strings, to be generated for insertion
 	into a Syllable object."""
 	
 	def __init__(self, ipa_string):
-		self.ipa = ipa_string
+		self.ipa = str(ipa_string)
 	
 	def __iter__(self):
 		return iter(self)
+	
+	def as_string(self):
+		return self.ipa
+	
 
 class Phonology:
 	"""Class for organizing/categorizing IPA symbols for random
@@ -231,9 +252,8 @@ class Phonology:
 				phonemes.append(Phoneme(phoneme_string))
 		return phonemes
 
-class Helper:
+class Helper():
 	"""Module to assist with file parsing."""
-	
 	# figure this one out for yourself, nerd
 	def is_whitespace(s):
 		for c in s:
